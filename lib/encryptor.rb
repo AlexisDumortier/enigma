@@ -6,10 +6,10 @@ class Encryptor < Cryptor
 
   attr_reader :encrypt_key, :encrypt_offset, :encrypt_shift
 
-  def initialize(message, key, date) 
+  def initialize(message, key = '', date = '') 
     super(message, key, date) 
     @encrypt_key = Key.new(key)
-    @encrypt_offset = Offset.new(date)
+    @encrypt_offset = (date == '' ? Offset.new : Offset.new(date))
     @encrypt_shift = [@encrypt_key.make_keys, @encrypt_offset.make_offsets].transpose.map{|a| a.sum} 
   end
 
@@ -43,7 +43,7 @@ class Encryptor < Cryptor
     shifted_alphabet_positions.each_with_index do |position, index|
       position.nil? ? result << @message[index] : result << alphabet[position]
     end
-    result.join
+    { encryption: result.join, key: @encrypt_key.digits, date: @encrypt_offset.date }
   end
 
 
