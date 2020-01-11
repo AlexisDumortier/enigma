@@ -24,4 +24,8 @@ class OffsetTest < Minitest::Test
     assert_equal 1672401025, offset.square_date
   end
 
+  def test_it_can_return_the_offset_values
+    offset = Offset.new('040895') 
+    assert_equal [1, 0, 2, 5] , offset.make_offsets 
+  end
 end

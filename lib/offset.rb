@@ -12,4 +12,9 @@ class Offset
     @date.to_i ** 2 
   end
 
+  def make_offsets
+    offset_digits = square_date.to_s.split('').map {|letter| letter.to_i}
+    offset_digits[-4..-1]
+  end
+
 end
