@@ -22,9 +22,9 @@ class EncryptorTest < Minitest::Test
     assert_equal expected, encryptor.encrypt_shift
   end
 
-  def test_it_can_return_an_array_of_ordinal_values_for_a_message
+  def test_it_can_return_an_array_of_alphabet_positions_for_a_message
     encryptor = Encryptor.new('message!!!', '01392', '100120')
-    assert_equal [109, 101, 115, 115, 97, 103, 101, 33, 33, 33], encryptor.message_in_ordinals
+    assert_equal [12, 4, 18, 18, 0, 6, 4, nil, nil, nil], encryptor.message_in_alphabet_positions
   end
 
 
