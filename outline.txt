@@ -1,0 +1,53 @@
+        -------
+        ENIGMA
+        -------
+        
+        INTERACTION
+          get_message
+          get_key
+
+        -------------
+        CRYPTOR
+        initialize
+          @key
+          @message
+          @date
+        -------------  
+      /               \
+---------                   ---------           ---------              ---------           ---------            
+ENCRYPTOR                   DECRYPTOR             KEY                   OFFSET              CRACK
+@key = Key.new              initialize            initialize('34234')   initialize          initialize
+@offset = Offset.new                              make_keys()           make_offset() 
+@shift
+initialize(key,offset,date)                        
+encrypt(mes,key,date)       decrypt(mes,key,date) 
+
+enigma = Enigma.new
+
+
+
+Class Enigma 
+
+  def initialize
+    @message = get_message 
+  end  
+
+  def get_message
+    interact = Interaction.new 
+    interact.get_message
+  end
+
+  def encrypt(@message, key = '', date = '')
+      encryptor = Encryptor(message, key, date)
+      encryptor.encrypt
+  end 
+
+  def decrypt(@message, key = '', date = '')
+      decryptor = Decryptor(message, key, date)
+      decryptor.decrypt
+  end 
+end
+
+
+
+
