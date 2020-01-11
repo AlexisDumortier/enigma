@@ -1,10 +1,11 @@
 class Cryptor
 
+  attr_reader :message, :key, :date
+
   def initialize(message, key, date) 
     @message = message
     @key = key
-    @date = date  
-  end 
-  
+    @date = date
+  end
 
 end
