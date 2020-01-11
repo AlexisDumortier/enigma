@@ -18,6 +18,13 @@ class EncryptorTest < Minitest::Test
     assert_equal '100120', encryptor.date 
     assert_equal key.digits, encryptor.encrypt_key.digits
     assert_equal offset.date, encryptor.encrypt_offset.date
+    expected = [key.make_keys, offset.make_offsets].transpose.map{|a| a.sum} 
+    assert_equal expected, encryptor.encrypt_shift
   end
 
+  def test_it_can_return_an_array_of_shifts_for_a_message
+    encryptor = Encryptor.new('message!!!', '01392', '100120')
+    assert_equal [5, 17, 39, 92, 5, 17, 39, 0, 0, 0], encryptor.message_shifts
+  end
+ 
 end
