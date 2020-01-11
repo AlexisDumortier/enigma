@@ -33,4 +33,14 @@ class EncryptorTest < Minitest::Test
     assert_equal [5, 17, 39, 92, 5, 17, 39, 0, 0, 0], encryptor.message_shifts
   end
 
+  def test_it_can_return_an_array_of_shifted_alphabet_positions
+    encryptor = Encryptor.new('message!!!', '01392', '100120')
+    assert_equal [17, 21, 3, 2, 5, 23, 16, nil, nil, nil], encryptor.shifted_alphabet_positions
+  end
+
+  def test_it_can_encrypt_a_given_message
+    encryptor = Encryptor.new('hello world!!', '02715', '040895')
+    assert_equal 'keder ohulw!!', encryptor.encrypt 
+  end
+
 end

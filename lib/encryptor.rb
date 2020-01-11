@@ -28,5 +28,23 @@ class Encryptor < Cryptor
     end
     shifts
   end
-  
+
+  def shifted_alphabet_positions
+    result = []
+    message_in_alphabet_positions.each_with_index do |position, index|
+      position.nil? ? result << position : result << (position + message_shifts[index]) % 27 
+    end
+    result
+  end
+
+  def encrypt
+    result = []
+    alphabet = ("a".."z").to_a << " "
+    shifted_alphabet_positions.each_with_index do |position, index|
+      position.nil? ? result << @message[index] : result << alphabet[position]
+    end
+    result.join
+  end
+
+
 end
