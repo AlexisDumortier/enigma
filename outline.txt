@@ -15,7 +15,7 @@
         -------------  
       /               \
 ---------                   ---------           ---------              ---------           ---------            
-ENCRYPTOR                   DECRYPTOR             KEY                   OFFSET              CRACK
+ENCRYPTOR                   DECRYPTOR             KEY [x]               OFFSET [x]              CRACK
 @key = Key.new              initialize            initialize('34234')   initialize          initialize
 @offset = Offset.new                              make_keys()           make_offset() 
 @shift
