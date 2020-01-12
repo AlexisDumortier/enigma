@@ -15,16 +15,14 @@
         -------------  
       /               \
 ---------                   ---------           ---------              ---------           ---------            
-ENCRYPTOR                   DECRYPTOR             KEY [x]               OFFSET [x]              CRACK
+ENCRYPTOR[x]                DECRYPTOR             KEY [x]               OFFSET [x]              CRACK
 @key = Key.new              initialize            initialize('34234')   initialize          initialize
 @offset = Offset.new                              make_keys()           make_offset() 
 @shift
-initialize(key,offset,date)                        
+initialize(mess,key,date)                        
 encrypt(mes,key,date)       decrypt(mes,key,date) 
 
 enigma = Enigma.new
-
-
 
 Class Enigma 
 
