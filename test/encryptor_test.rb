@@ -20,14 +20,13 @@ class EncryptorTest < Minitest::Test
     assert_equal key.digits, encryptor.encrypt_key.digits
     assert_equal offset.date, encryptor.encrypt_offset.date
     expected = [key.make_keys, offset.make_offsets].transpose.map{|a| a.sum} 
-    assert_equal expected, encryptor.encrypt_shift
+    assert_equal expected, encryptor.shift
   end
 
   def test_it_can_return_an_array_of_alphabet_positions_for_a_message
     encryptor = Encryptor.new('message!!!', '01392', '100120')
     assert_equal [12, 4, 18, 18, 0, 6, 4, nil, nil, nil], encryptor.message_in_alphabet_positions
   end
-
 
   def test_it_can_return_an_array_of_shifts_for_a_message
     encryptor = Encryptor.new('message!!!', '01392', '100120')
@@ -42,6 +41,7 @@ class EncryptorTest < Minitest::Test
   def test_it_can_encrypt_a_given_message
 
     encryptor1 = Encryptor.new('hello world!!', '02715', '040895')
+    require 'pry'; binding.pry
     expected1 = {encryption: 'keder ohulw!!', key: encryptor1.encrypt_key.digits, date: encryptor1.encrypt_offset.date }
     assert_equal expected1, encryptor1.encrypt
 
