@@ -1,38 +1,18 @@
-require_relative './cryptor'
-require_relative './decryptor'
+require_relative './enigma'
 
+ARGV == ['ecnrypted.txt', 'cracked.txt', 'date']
+ARGV[0] == 'encrypted.txt'
+ARGV[1] == 'cracked.txt'
+ARGV[2] == 'date'
 
-class Crack < Cryptor
+encrypted = File.open(ARGV[0], 'r')
+message = encrypted.read
 
-  def initialize(message, date = Time.now.strftime('%d%m%y')) 
-    @message = message 
-    @date = date
-  end
-  
-  def make_key_string(number)
-    key_string = number.to_s
-    (5 - number.to_s.length).times {key_string = '0' + key_string} 
-    key_string
-  end
+enigma = Enigma.new
+output = enigma.crack(message, ARGV[2])
 
-  def find_key_from_date
-    count = 0
-    key = make_key_string(count)
-    decryptor = Decryptor.new(@message, key, @date)
-    output = decryptor.decrypt
-    while (output[:decryption][-4..-1] != ' end') && (count < 99999)
-      count += 1
-      key = make_key_string(count)
-      decryptor = Decryptor.new(@message, key, @date)
-      output = decryptor.decrypt
-    end
-    key
-  end
+cracked = File.open(ARGV[1], 'w')
+cracked.write(output[:decryption])
+cracked.close
 
-  def crack
-    key = find_key_from_date
-    decryptor = Decryptor.new(@message, key, @date)
-    decryptor.decrypt
-  end
-
-end
+puts "Created #{ARGV[1]} with the cracked key #{output[:key]} and date #{output[:date]}"

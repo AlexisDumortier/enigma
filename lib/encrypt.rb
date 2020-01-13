@@ -10,10 +10,6 @@ message = file.read
 enigma = Enigma.new
 output = enigma.encrypt(message)
 
-
-file = File.open(ARGV[0], "r")
-message = file.read
-
 encrypted_file = File.open(ARGV[1], "w")
 encrypted_file.write(output[:encryption])
 encrypted_file.close
