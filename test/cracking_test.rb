@@ -7,7 +7,7 @@ class CrackingTest < Minitest::Test
 
   def test_it_exists
     crack = Cracking.new('vjqtbeaweqihssi', '291018')
-    assert_instance_of Crack, crack 
+    assert_instance_of Cracking, crack 
   end
 
   def test_it_can_make_a_key_string_from_a_number
