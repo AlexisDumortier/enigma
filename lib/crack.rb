@@ -1,4 +1,6 @@
 require_relative './cryptor'
+require_relative './decryptor'
+
 
 class Crack < Cryptor
 
@@ -11,6 +13,30 @@ class Crack < Cryptor
     key_string = number.to_s
     (5 - number.to_s.length).times {key_string = '0' + key_string} 
     key_string
+  end
+
+  def find_key_from_date
+    count = 0
+    key = make_key_string(count)
+    decryptor = Decryptor.new(@message, key, @date)
+    output = decryptor.decrypt
+    while output[:decryption][-4..-1] != ' end'
+      count += 1
+      key = make_key_string(count)
+      decryptor = Decryptor.new(@message, key, @date)
+      output = decryptor.decrypt
+    end
+    key
+  end
+
+  def crack
+    if @date != ""
+      key = find_key_from_date
+      decryptor = Decryptor.new(@message, key, @date)
+      decryptor.decrypt
+    else
+      'cant do it yet'
+    end
   end
 
 end
