@@ -4,7 +4,7 @@ require_relative './decryptor'
 
 class Crack < Cryptor
 
-  def initialize(message, date = '') 
+  def initialize(message, date = Time.now.strftime('%d%m%y')) 
     @message = message 
     @date = date
   end
@@ -20,7 +20,7 @@ class Crack < Cryptor
     key = make_key_string(count)
     decryptor = Decryptor.new(@message, key, @date)
     output = decryptor.decrypt
-    while output[:decryption][-4..-1] != ' end'
+    while (output[:decryption][-4..-1] != ' end') && (count < 99999)
       count += 1
       key = make_key_string(count)
       decryptor = Decryptor.new(@message, key, @date)
@@ -30,13 +30,9 @@ class Crack < Cryptor
   end
 
   def crack
-    if @date != ""
-      key = find_key_from_date
-      decryptor = Decryptor.new(@message, key, @date)
-      decryptor.decrypt
-    else
-      'cant do it yet'
-    end
+    key = find_key_from_date
+    decryptor = Decryptor.new(@message, key, @date)
+    decryptor.decrypt
   end
 
 end

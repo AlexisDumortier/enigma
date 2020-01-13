@@ -5,6 +5,7 @@ require_relative './offset'
 class Decryptor < Cryptor
 
   attr_reader :decrypt_key, :decrypt_offset, :decrypt_shift
+  attr_accessor :shift
 
   def initialize(message, key, date = '') 
     super(message, key, date) 

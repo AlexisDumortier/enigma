@@ -1,6 +1,7 @@
 require 'minitest/autorun'
 require 'minitest/pride'
 require_relative '../lib/crack'
+require_relative '../lib/encryptor'
 
 class CrackTest < Minitest::Test 
 
@@ -22,6 +23,12 @@ class CrackTest < Minitest::Test
   def test_it_can_crack_the_message_with_a_date
     crack = Crack.new('vjqtbeaweqihssi', '291018')
     expected = { decryption: 'hello world end', date: '291018', key: '08304' }
+    assert_equal expected, crack.crack
+
+    encryptor = Encryptor.new('message is this end')
+    output = encryptor.encrypt 
+    crack = Crack.new(output[:encryption])
+    expected = { decryption: 'message is this end', date: Time.now.strftime('%d%m%y'), key: output[:key] }
     assert_equal expected, crack.crack 
   end
 
