@@ -1,3 +1,4 @@
+require_relative '../test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'mocha/minitest'
@@ -41,7 +42,6 @@ class EncryptorTest < Minitest::Test
   def test_it_can_encrypt_a_given_message
 
     encryptor1 = Encryptor.new('hello world!!', '02715', '040895')
-    require 'pry'; binding.pry
     expected1 = {encryption: 'keder ohulw!!', key: encryptor1.encrypt_key.digits, date: encryptor1.encrypt_offset.date }
     assert_equal expected1, encryptor1.encrypt
 
