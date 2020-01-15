@@ -42,17 +42,18 @@ class EncryptorTest < Minitest::Test
     encryptor1 = Encryptor.new('hello world!!', '02715', '040895')
     expected1 = {encryption: 'keder ohulw!!', key: encryptor1.encrypt_key.digits, date: encryptor1.encrypt_offset.date }
     assert_equal expected1, encryptor1.encrypt
-
-    # encryptor2 = Encryptor.new('hello world!!')
-    # key = mock('key')
-    # key.stubs(:digits).returns('28563')
-    # offset = mock('offset')
-    # offset.stubs(:date).returns('110120')
-    # encryptor2.stubs(:encrypt_key).returns(key)
-    # encryptor2.stubs(:encrypt_shift).returns([32, 89, 56, 63])
-    # encryptor2.stubs(:encrypt_offset).returns(offset)
-    # expected2 = {encryption: 'mmnuthyxwtf!!', key: encryptor2.encrypt_key.digits, date: encryptor2.encrypt_offset.date }
-    # assert_equal expected2, encryptor2.encrypt
+    
+    encryptor2 = Encryptor.new('hello world!!')
+    encryptor2.stubs(:message).returns('hello world!!')
+    key = Key.new
+    key.stubs(:digits).returns('28563')
+    offset = Offset.new
+    offset.stubs(:date).returns('110120')
+    encryptor2.stubs(:encrypt_key).returns(key)
+    encryptor2.stubs(:shift).returns([32, 89, 56, 63])
+    encryptor2.stubs(:encrypt_offset).returns(offset)
+    expected2 = {encryption: 'mmnuthyxwtf!!', key: encryptor2.encrypt_key.digits, date: encryptor2.encrypt_offset.date }
+    assert_equal expected2, encryptor2.encrypt
   end
 
 end

@@ -26,9 +26,8 @@ class KeyTest < Minitest::Test
   def test_it_can_return_the_keys_produced_from_the_digits
     key1 = Key.new('03210')
     assert_equal [3, 32, 21, 10], key1.make_keys
-    key2 = mock('key')
+    key2 = Key.new
     key2.stubs(:digits).returns('02132')
-    key2.stubs(:make_keys).returns([2, 21, 13, 32])
     assert_equal [2, 21, 13, 32], key2.make_keys
   end
 

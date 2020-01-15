@@ -22,7 +22,7 @@ class EnigmaTest < Minitest::Test
   def test_it_can_decrypt_a_message
     enigma = Enigma.new
     expected = { decryption: 'hello world!!' , key: '02715', date: '040895'}
-    assert_equal expected, enigma.decrypt("keder ohulw!!", '02715', '040895')
+    assert_equal expected, enigma.decrypt('keder ohulw!!', '02715', '040895')
 
     expected = { decryption: 'hello world' , key: '02715', date: Time.now.strftime('%d%m%y')}
     assert_equal expected, enigma.decrypt('nib udmcxpu', '02715')

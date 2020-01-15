@@ -1,6 +1,7 @@
 require_relative '../test_helper'
 require 'minitest/autorun'
 require 'minitest/pride'
+require 'mocha/minitest'
 require_relative '../lib/cracking'
 require_relative '../lib/encryptor'
 
@@ -32,10 +33,15 @@ class CrackingTest < Minitest::Test
     expected = { decryption: 'hello world end', date: '291018', key: '08304' }
     assert_equal expected, crack.crack
 
-    encryptor = Encryptor.new('message is this end')
+    encryptor = Encryptor.new('message is that it is hard to decrypt end', '08304')
     output = encryptor.encrypt 
     crack = Cracking.new(output[:encryption])
-    expected = { decryption: 'message is this end', date: Time.now.strftime('%d%m%y'), key: output[:key] }
+    crack.stubs(:find_key_from_date).returns('08304')
+    expected = { 
+                decryption: 'message is that it is hard to decrypt end', 
+                date: Time.now.strftime('%d%m%y'), 
+                key: output[:key] 
+                }
     assert_equal expected, crack.crack 
   end
 
