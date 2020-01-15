@@ -5,12 +5,11 @@ require_relative './offset'
 class Decryptor < Cryptor
 
   attr_reader :decrypt_key, :decrypt_offset, :decrypt_shift
-  attr_accessor :shift
 
-  def initialize(message, key, date = '') 
-    super(message, key, date) 
+  def initialize(message, key, date = '')
+    super(message)
     @decrypt_key = Key.new(key)
-    @decrypt_offset = (date == '' ? Offset.new : Offset.new(date))
+    @decrypt_offset = Offset.new(date)
     @shift = [@decrypt_key.make_keys, @decrypt_offset.make_offsets].transpose.map{|a| a.sum} 
   end
 

@@ -1,8 +1,9 @@
-require_relative './cryptor'
 require_relative './decryptor'
 
 
-class Cracking < Cryptor
+class Cracking
+
+  attr_reader :message, :date
 
   def initialize(message, date = Time.now.strftime('%d%m%y')) 
     @message = message 
@@ -16,8 +17,7 @@ class Cracking < Cryptor
   end
 
   def find_key_from_date
-    count = 0
-    key = make_key_string(count)
+    count, key = 0, make_key_string(count)
     decryptor = Decryptor.new(@message, key, @date)
     output = decryptor.decrypt
     while (output[:decryption][-4..-1] != ' end') && (count < 100000)

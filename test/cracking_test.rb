@@ -11,6 +11,12 @@ class CrackingTest < Minitest::Test
     assert_instance_of Cracking, crack 
   end
 
+  def test_it_has_attributes
+    crack = Cracking.new('vjqtbeaweqihssi', '291018')
+    assert_equal 'vjqtbeaweqihssi', crack.message
+    assert_equal '291018', crack.date
+  end
+
   def test_it_can_make_a_key_string_from_a_number
     crack = Cracking.new('vjqtbeaweqihssi', '291018')
     assert_equal '00231', crack.make_key_string(231)

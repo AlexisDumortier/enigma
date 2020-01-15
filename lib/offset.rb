@@ -4,8 +4,12 @@ class Offset
 
   attr_reader :date
 
-  def initialize(date = Time.now.strftime('%d%m%y')) 
-    @date = date
+  def initialize(date)
+    if date == ''
+      @date = Time.now.strftime('%d%m%y')
+    else
+      @date = date
+    end
   end
 
   def square_date

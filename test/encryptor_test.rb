@@ -16,8 +16,6 @@ class EncryptorTest < Minitest::Test
     key = Key.new('01392')
     offset = Offset.new('100120')
     assert_equal 'message', encryptor.message 
-    assert_equal '01392', encryptor.key 
-    assert_equal '100120', encryptor.date 
     assert_equal key.digits, encryptor.encrypt_key.digits
     assert_equal offset.date, encryptor.encrypt_offset.date
     expected = [key.make_keys, offset.make_offsets].transpose.map{|a| a.sum} 
