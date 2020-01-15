@@ -1,15 +1,13 @@
 class Cryptor
 
-  attr_reader :message, :key, :date
+  attr_reader :message
 
-  def initialize(message, key = '', date = '') 
-    @message = message
-    @key = key
-    @date = date
+  def initialize(message)
+    @message = message.downcase
   end
 
   def message_in_alphabet_positions
-    alphabet = ("a".."z").to_a << " "
+    alphabet = ('a'..'z').to_a << ' '
     @message.split('').map {|letter| alphabet.find_index(letter)}
   end
 
