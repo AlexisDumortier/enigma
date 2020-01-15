@@ -4,7 +4,7 @@ class Offset
 
   attr_reader :date
 
-  def initialize(date)
+  def initialize(date = '')
     if date == ''
       @date = Time.now.strftime('%d%m%y')
     else

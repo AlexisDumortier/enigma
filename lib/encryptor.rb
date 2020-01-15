@@ -10,13 +10,17 @@ class Encryptor < Cryptor
     super(message)
     @encrypt_key = Key.new(key)
     @encrypt_offset = Offset.new(date)
-    @shift = [@encrypt_key.make_keys, @encrypt_offset.make_offsets].transpose.map{|a| a.sum} 
+    @shift = [encrypt_key.make_keys, encrypt_offset.make_offsets].transpose.map{|a| a.sum} 
   end
 
   def shifted_alphabet_positions
     result = []
     message_in_alphabet_positions.each_with_index do |position, index|
-      position.nil? ? result << position : result << (position + message_shifts[index]) % 27 
+      if position.nil? 
+        result << position 
+      else 
+        result << (position + message_shifts[index]) % 27 
+      end
     end
     result
   end
