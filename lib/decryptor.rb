@@ -4,13 +4,13 @@ require_relative './offset'
 
 class Decryptor < Cryptor
 
-  attr_reader :decrypt_key, :decrypt_offset, :decrypt_shift
+  attr_reader :decrypt_key, :decrypt_offset, :shift
 
   def initialize(message, key, date = '')
     super(message)
     @decrypt_key = Key.new(key)
     @decrypt_offset = Offset.new(date)
-    @shift = [@decrypt_key.make_keys, @decrypt_offset.make_offsets].transpose.map{|a| a.sum} 
+    @shift = [decrypt_key.make_keys, decrypt_offset.make_offsets].transpose.map{|a| a.sum} 
   end
 
   def unshifted_alphabet_positions

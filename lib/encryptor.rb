@@ -27,7 +27,7 @@ class Encryptor < Cryptor
     shifted_alphabet_positions.each_with_index do |position, index|
       position.nil? ? result << @message[index] : result << alphabet[position]
     end
-    { encryption: result.join, key: @encrypt_key.digits, date: @encrypt_offset.date }
+    { encryption: result.join, key: encrypt_key.digits, date: encrypt_offset.date }
   end
 
 end

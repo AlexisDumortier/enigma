@@ -13,7 +13,7 @@ class Offset
   end
 
   def square_date
-    @date.to_i ** 2 
+    date.to_i ** 2 
   end
 
   def make_offsets
